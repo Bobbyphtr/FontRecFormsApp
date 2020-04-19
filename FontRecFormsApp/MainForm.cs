@@ -99,12 +99,13 @@ namespace FontRecFormsApp
             if (isImageExist)
             {
                 HelpLabel.TextAlign = ContentAlignment.MiddleRight;
-                HelpLabel.Text = "Drag and drop inside the image to begin crop!";
+                HelpLabel.Text = "Click and drag inside the image to begin crop!";
 
                 // Cropping
                 inputImageBox.MouseDown += new MouseEventHandler(inputImageBox_MouseDown);
                 inputImageBox.MouseMove += new MouseEventHandler(inputimageBox_MouseMove);
                 inputImageBox.MouseEnter += new EventHandler(inputImageBox_MouseEnter);
+                inputImageBox.MouseLeave += new EventHandler(inputImageBox_MouseLeave);
                 Controls.Add(inputImageBox);
             } else
             {
@@ -114,16 +115,17 @@ namespace FontRecFormsApp
         }
         private void DisableCropMode()
         {
+            CropButton.Enabled = false;
             inputImageBox.MouseDown -= new MouseEventHandler(inputImageBox_MouseDown);
             inputImageBox.MouseMove -= new MouseEventHandler(inputimageBox_MouseMove);
             inputImageBox.MouseEnter -= new EventHandler(inputImageBox_MouseEnter);
+            inputImageBox.MouseLeave -= new EventHandler(inputImageBox_MouseLeave);
             inputImageBox.Controls.Remove(inputImageBox);
         }
         private void ClearButton_Click(object sender, EventArgs e)
         {
             inputImageBox.Image = null;
             ClearButton.Enabled = false;
-          //  PlaceholderLabel.Visible = true;
             ScanButton.Enabled = false;
 
             inputImageBox.Image = Properties.Resources.Artboard_12;
@@ -178,8 +180,41 @@ namespace FontRecFormsApp
                 cropY = e.Y;
             }
         }
+
+        private void inputImageBox_MouseEnter(object sender, EventArgs e)
+        {
+            base.OnMouseEnter(e);
+            Cursor = Cursors.Cross;
+        }
+
+        private void inputImageBox_MouseLeave(object sender, EventArgs e)
+        {
+            base.OnMouseLeave(e);
+            Cursor = Cursors.Default;
+        }
+
+        private void inputimageBox_MouseMove(object sender, MouseEventArgs e)
+        {
+            base.OnMouseMove(e);
+            if (e.Button == MouseButtons.Left)
+            {
+                if (e.X != cropX && e.Y != cropY)
+                {
+                    CropButton.Enabled = true;
+                    inputImageBox.Refresh();
+                    rectW = e.X - cropX;
+                    rectH = e.Y - cropY;
+                    Graphics g = inputImageBox.CreateGraphics();
+                    g.DrawRectangle(cropPen, cropX, cropY, rectW, rectH);
+                    g.Dispose();
+                }
+
+            }
+        }
+
         private void ScanButton_Click(object sender, EventArgs e)
         {
+            Cursor = Cursors.WaitCursor;
             var python = @"C:\MyProgramFiles\Anaconda3\envs\tf_gpu\python.exe";
             var script = AppDomain.CurrentDomain.BaseDirectory + "\\Script\\DeepFontAPI.py";
 
@@ -217,31 +252,8 @@ namespace FontRecFormsApp
             String[] font_result =  results.Split(separator, StringSplitOptions.RemoveEmptyEntries);
 
             Console.WriteLine(font_result);
-            MsgBox.Show(font_result[font_result.Length - 2], inputImageBox.Image, font_result[font_result.Length - 1].Trim().ToString());
-        }
-        private void inputImageBox_MouseEnter(object sender, EventArgs e)
-        {
-            base.OnMouseEnter(e);
-            Cursor = Cursors.Cross;
-        }
-        private void inputimageBox_MouseMove(object sender, MouseEventArgs e)
-        {
-            base.OnMouseMove(e);
-            if (e.Button == MouseButtons.Left)
-            {
-                CropButton.Enabled = true;
-                inputImageBox.Refresh();
-                rectW = e.X - cropX;
-                rectH = e.Y - cropY;
-                Graphics g = inputImageBox.CreateGraphics();
-                g.DrawRectangle(cropPen, cropX, cropY, rectW, rectH);
-                g.Dispose();
-            }
-        }
-        protected override void OnMouseEnter(EventArgs e)
-        {
-            base.OnMouseEnter(e);
             Cursor = Cursors.Default;
+            MsgBox.Show(font_result[font_result.Length - 2], inputImageBox.Image, font_result[font_result.Length - 1].Trim().ToString());
         }
     }
 }

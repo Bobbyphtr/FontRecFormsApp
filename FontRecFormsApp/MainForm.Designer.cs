@@ -126,9 +126,10 @@
             this.Controls.Add(this.ScanButton);
             this.Controls.Add(this.inputImageBox);
             this.DoubleBuffered = true;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "MainForm";
-            this.Text = "DeepFont Recognition";
+            this.Text = "Recofont";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.inputImageBox)).EndInit();
             this.ResumeLayout(false);
