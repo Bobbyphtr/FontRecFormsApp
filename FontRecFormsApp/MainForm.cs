@@ -44,7 +44,7 @@ namespace FontRecFormsApp
                         isImageExist = true;
                         EnableCropMode();
                     }
-                    catch(OutOfMemoryException ex)
+                    catch(OutOfMemoryException)
                     {
                         MessageBox.Show("The file is not an image, please choose an image.");
                     }
@@ -82,7 +82,7 @@ namespace FontRecFormsApp
                         isImageExist = true;
                         EnableCropMode();
                     }
-                    catch (OutOfMemoryException ex)
+                    catch (OutOfMemoryException)
                     {
                         MessageBox.Show("The file is not an image, please choose an image.");
                         isNotCorrectFile = true;
@@ -142,12 +142,25 @@ namespace FontRecFormsApp
             Cursor = Cursors.Default;
             Bitmap bmp = new Bitmap(inputImageBox.Width, inputImageBox.Height);
             inputImageBox.DrawToBitmap(bmp, inputImageBox.ClientRectangle);
+            Bitmap croppedImg = new Bitmap(Math.Abs(rectW), Math.Abs(rectH));
 
-            Bitmap croppedImg = new Bitmap(rectW, rectH);
-            
-            for (int i = 0; i< rectW; i++)
+            if (rectH < 0 && rectW < 0)
             {
-                for(int j = 0; j < rectH; j++)
+                cropY = cropY - Math.Abs(rectH);
+                cropX = cropX - Math.Abs(rectW);
+            }
+            else if (rectW < 0)
+            {
+                cropX = cropX - Math.Abs(rectW);
+            }
+            else if (rectH < 0)
+            {
+                cropY = cropY - Math.Abs(rectH);
+            }
+
+            for (int i = 0; i< Math.Abs(rectW); i++)
+            {
+                for(int j = 0; j < Math.Abs(rectH); j++)
                 {
                     Color pxlclr = bmp.GetPixel(cropX + i, cropY + j);
                     croppedImg.SetPixel(i, j, pxlclr);
@@ -205,10 +218,24 @@ namespace FontRecFormsApp
                     rectW = e.X - cropX;
                     rectH = e.Y - cropY;
                     Graphics g = inputImageBox.CreateGraphics();
-                    g.DrawRectangle(cropPen, cropX, cropY, rectW, rectH);
+                    if (rectH < 0 && rectW < 0)
+                    {
+                        g.DrawRectangle(cropPen, e.X, e.Y, Math.Abs(rectW), Math.Abs(rectH));
+                    }
+                    else if (rectW < 0)
+                    {
+                        g.DrawRectangle(cropPen, e.X, cropY, Math.Abs(rectW), Math.Abs(rectH));
+                    } 
+                    else if (rectH < 0)
+                    {
+                        g.DrawRectangle(cropPen, cropX, e.Y, Math.Abs(rectW), Math.Abs(rectH));
+                    }
+                    else
+                    {
+                        g.DrawRectangle(cropPen, cropX, cropY, Math.Abs(rectW), Math.Abs(rectH));
+                    }
                     g.Dispose();
                 }
-
             }
         }
 
