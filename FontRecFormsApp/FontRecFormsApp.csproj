@@ -83,6 +83,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="loading_box.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="loading_box.Designer.cs">
+      <DependentUpon>loading_box.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -97,6 +103,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="loading_box.resx">
+      <DependentUpon>loading_box.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MsgBox.resx">
       <DependentUpon>MsgBox.cs</DependentUpon>
     </EmbeddedResource>

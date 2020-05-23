@@ -30,75 +30,75 @@
         {
             this.inputPictureBox = new System.Windows.Forms.PictureBox();
             this.titleLabel = new System.Windows.Forms.Label();
-            this.fontLabel = new System.Windows.Forms.Label();
-            this.previewLabel = new System.Windows.Forms.Label();
-            this.previewLabel2 = new System.Windows.Forms.Label();
+            this.top_prediction_label = new System.Windows.Forms.Label();
+            this.resultListBox = new System.Windows.Forms.ListBox();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.inputPictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // inputPictureBox
             // 
-            this.inputPictureBox.Location = new System.Drawing.Point(66, 91);
+            this.inputPictureBox.Location = new System.Drawing.Point(12, 250);
             this.inputPictureBox.Name = "inputPictureBox";
-            this.inputPictureBox.Size = new System.Drawing.Size(312, 138);
-            this.inputPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.inputPictureBox.Size = new System.Drawing.Size(386, 214);
+            this.inputPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.inputPictureBox.TabIndex = 0;
             this.inputPictureBox.TabStop = false;
             // 
             // titleLabel
             // 
             this.titleLabel.AutoSize = true;
-            this.titleLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.titleLabel.Location = new System.Drawing.Point(136, 26);
+            this.titleLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 25.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.titleLabel.Location = new System.Drawing.Point(12, 21);
             this.titleLabel.Name = "titleLabel";
-            this.titleLabel.Size = new System.Drawing.Size(172, 31);
+            this.titleLabel.Size = new System.Drawing.Size(269, 52);
             this.titleLabel.TabIndex = 1;
             this.titleLabel.Text = "Scan Result";
             // 
-            // fontLabel
+            // top_prediction_label
             // 
-            this.fontLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.fontLabel.Location = new System.Drawing.Point(64, 258);
-            this.fontLabel.Name = "fontLabel";
-            this.fontLabel.Size = new System.Drawing.Size(317, 41);
-            this.fontLabel.TabIndex = 2;
-            this.fontLabel.Text = "Font Name";
-            this.fontLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.top_prediction_label.AutoSize = true;
+            this.top_prediction_label.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.top_prediction_label.Location = new System.Drawing.Point(398, 117);
+            this.top_prediction_label.Name = "top_prediction_label";
+            this.top_prediction_label.Size = new System.Drawing.Size(232, 31);
+            this.top_prediction_label.TabIndex = 8;
+            this.top_prediction_label.Text = "Top N Prediction";
             // 
-            // previewLabel
+            // resultListBox
             // 
-            this.previewLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.previewLabel.Location = new System.Drawing.Point(12, 321);
-            this.previewLabel.Name = "previewLabel";
-            this.previewLabel.Size = new System.Drawing.Size(426, 119);
-            this.previewLabel.TabIndex = 3;
-            this.previewLabel.Text = "A quick brown fox jumps over the lazy dog";
-            this.previewLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.resultListBox.FormattingEnabled = true;
+            this.resultListBox.ItemHeight = 16;
+            this.resultListBox.Location = new System.Drawing.Point(404, 160);
+            this.resultListBox.Name = "resultListBox";
+            this.resultListBox.Size = new System.Drawing.Size(675, 404);
+            this.resultListBox.TabIndex = 9;
+            this.resultListBox.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.resultListBox_DrawItem);
             // 
-            // previewLabel2
+            // label1
             // 
-            this.previewLabel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.previewLabel2.Location = new System.Drawing.Point(12, 464);
-            this.previewLabel2.Name = "previewLabel2";
-            this.previewLabel2.Size = new System.Drawing.Size(426, 112);
-            this.previewLabel2.TabIndex = 4;
-            this.previewLabel2.Text = "A quick brown fox jumps over the lazy dog";
-            this.previewLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(15, 117);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(111, 31);
+            this.label1.TabIndex = 10;
+            this.label1.Text = "Sample";
             // 
-            // CustomMsgBox
+            // MsgBox
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(450, 601);
-            this.Controls.Add(this.previewLabel2);
-            this.Controls.Add(this.previewLabel);
-            this.Controls.Add(this.fontLabel);
+            this.ClientSize = new System.Drawing.Size(1091, 601);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.resultListBox);
+            this.Controls.Add(this.top_prediction_label);
             this.Controls.Add(this.titleLabel);
             this.Controls.Add(this.inputPictureBox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "CustomMsgBox";
+            this.Name = "MsgBox";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Result";
@@ -113,8 +113,8 @@
 
         private System.Windows.Forms.PictureBox inputPictureBox;
         private System.Windows.Forms.Label titleLabel;
-        private System.Windows.Forms.Label fontLabel;
-        private System.Windows.Forms.Label previewLabel;
-        private System.Windows.Forms.Label previewLabel2;
+        private System.Windows.Forms.Label top_prediction_label;
+        private System.Windows.Forms.ListBox resultListBox;
+        private System.Windows.Forms.Label label1;
     }
 }
